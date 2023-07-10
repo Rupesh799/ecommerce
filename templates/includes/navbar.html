@@ -1,0 +1,81 @@
+{% load static  %}
+
+<header class="section-header">
+    <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom ">
+    <div class="container sticky-top">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+    </div> <!-- container //  -->
+    </nav>
+    
+    <section class="header-main border-bottom">
+        <div class="container sticky-top">
+    <div class="row align-items-center">
+        <div class="col-lg-2 col-md-3 col-6">
+            <a href="{% url 'home' %}" class="font-weight-bold font-size-bold" style="font-size: 1.7rem;">
+                <span style="color: rgb(79,57,142); font-weight:900;">SPORTS</span>  <span class="px-1 " style="color: orange; font-weight:900;">HUB</span>
+            </a> <!-- brand-wrap.// -->
+        </div>
+        <div class="col-lg col-sm col-md col-6 flex-grow-0">
+            <div class="category-wrap dropdown  d-inline-block float-right" data-bs-toggle="dropdown">
+                <button type="button" class="btn text-white dropdown-toggle" data-toggle="dropdown" style="background-color: rgb(79,57,142);"> 
+                    All category 
+                </button>
+                <div class="dropdown-menu">
+                    {% for c in links %}
+                    <a class="dropdown-item" href="{{ c.get_url }}">{{ c.category_name }} </a>
+                   {% endfor %}
+            
+                </div>
+            </div>  <!-- category-wrap.// -->
+        </div> <!-- col.// -->
+        <a href="{% url 'store' %}" class="btn btn-outline-warning" >Store</a>
+        <div class="col-lg  col-md-6 col-sm-12 col">
+            <form action="{% url 'search' %}" class="search" method="GET">
+                <div class="input-group w-100">
+                    <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
+                    
+                    <div class="input-group-append">
+                      <button class="btn " style="background-color:rgb(79,57,142); color:white;"  type="submit"  onMouseOver="this.style.color='orange'" onMouseOut="this.style.color='white'">
+                        <i class="fa fa-search" ></i>
+                      </button>
+                    </div>
+                </div>
+            </form> <!-- search-wrap .end// -->
+        </div> <!-- col.// -->
+        <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0">
+                        {% if not user.is_authenticated %}
+                        <div class="widget-header">
+                            <small class="title text-muted">Welcome guest!</small>
+                            <div class="mb-4"> 
+                               <a href="{% url 'login' %}"  ><buton class="btn text-white" style="background-color:rgb(79,57,142)">LOGIN</buton></a><span class="dark-transp"> | </span>
+                                <a href="{% url 'register' %}" > <buton class="btn  btn-outline-warning" >REGISTER </buton></a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="widget-header">
+                            <small class="title font-weight-bold text-uppercase mb-2">WELCOME , <span class="text-warning">{{ user.first_name }}</span></small>
+                            <div class="mb-4"> 
+                               <a href="{% url 'login' %}"  ><buton class="btn text-white" style="background-color:rgb(79,57,142)">Dashboard</buton></a><span class="dark-transp"> | </span>
+                                <a href="{% url 'logout' %}" > <buton class="btn  btn-outline-warning" >Logout</buton></a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3 mt-3 ">
+                            <div class="icon icon-sm rounded-circle border text-warning"><i class="fa fa-shopping-cart" style="color:rgb(79,57,142); " onMouseOver="this.style.color='orange'" onMouseOut="this.style.color='rgb(79,57,142)'" ></i></div>
+                            <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+                        </a>
+                    </div> <!-- widgets-wrap.// -->
+                </div> <!-- col.// -->
+    </div> <!-- row.// -->
+        </div> <!-- container.// -->
+    </section> <!-- header-main .// -->
+    
+    
+    
+    
+    </header> <!-- section-header.// -->
+    
